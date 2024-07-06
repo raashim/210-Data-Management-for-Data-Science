@@ -1,0 +1,54 @@
+Homework 3 
+
+Part 1: Movies Recommendation
+
+In this part, you'll implement a prototype movie recommendation program by filling in the function implementations in the given hw3.py template file.
+Make sure you implement your functions in hw3.py. Do not implement the functions in this notebook. They will be imported here from hw3.py, so you can test them directly.
+You can run your tests on the given input files, but you're encouraged to make your own test files as well, to make sure that you cover the various paths of logic in your functions. You don't have to submit any of your test files.
+You may assume that all parameter values given to your functions will be valid. Also, in any function that requires the returned values to be sorted or ranked, ties may be broken arbitrarily between equal values.
+You may assume that input files will be correctly formatted, and data types will be as expected.
+For all rating computations, do not round up (or otherwise modify) the rating unless otherwise specified.
+
+Input Files
+Ratings file: A text file that contains movie ratings. Each line has the id of the user who rated the movie, the id of the movie, and its rating (range 0-5 inclusive). A movie can have multiple ratings from different users. A user can rate multiple movies but can rate a particular movie only once.
+Movies file: A text file that contains movies and their genres. Each line has a movie id, the name of the movie, the year it was released, and the genre of the movie (e.g, Action, Drama, etc.).
+There are sample movies and ratings files provided on Codebench.
+
+1.1 load_movies_dataframe (10 points) 
+Write a function load_movies_dataframe(file_path) that takes in a movies file and returns a pandas DataFrame, where the index is the movie id and the columns are "title", "year", and "genre" (in that order), sorted by movie id.
+
+1.2 load_ratings_dataframe (10 points) 
+Write a function load_ratings_dataframe(file_path) that reads a ratings csv file into a pandas DataFrame with columns "user_id", "movie_id", and "rating", sorted by user id (Use default index).
+
+1.3 count_unique_genres (10 points) 
+Write a function named count_unique_genres(movies_df) that takes a pandas DataFrame as input and returns the count of unique genres available in the movies dataset. This function should work on the DataFrame loaded by your previously defined load_movies_dataframe function.
+
+1.4: average_rating_by_genre (10 points) 
+Write a function named average_rating_by_genre(movies_df, ratings_df) that performs an analysis on the movie ratings dataset. Your function will take two pandas DataFrames as input: the first containing movies data (movies_df) and the second containing ratings data (ratings_df). Your goal is to calculate the average rating received by movies in each genre. Both dataFrames are created in 1.1 and 1.2
+
+Given that each movie is associated with a single genre in the movies_df DataFrame, and that movies_df is indexed by movie_id, you will need to merge this DataFrame with ratings_df, which contains ratings for each movie. After merging, calculate the average rating for movies in each genre and return the results as a pandas Series. The index of the Series should be the genre, and the value should be the average rating for that genre.
+
+Your goal is to calculate the average rating received by movies within each genre. The calculation should aggregate all ratings for all movies in a genre and then compute the average of these ratings. This means you should not calculate the average rating per movie and then average those averages across a genre; instead, all individual ratings for movies within each genre should be averaged together directly.
+
+1.5: calculate_average_ratings (10 points) 
+Write a function named calculate_average_ratings(ratings_df) that takes a pandas DataFrame as input: ratings_df (created in 1.2).
+
+Your function should return a pandas Series where the index represents the movie_id and each value is the average rating of the corresponding movie. For example:
+
+1 3.833333
+2 3.416667
+3 4.000000
+This Series will allow easy access to the average rating of each movie by using its movie_id.
+
+Note: You may use groupby() on 'movie_id' to group the ratings, then calculate the mean of the ratings for each group.
+
+1.6. highest_rated_movie_by_genre_and_year (10 points)
+Write a function named highest_rated_movie_by_genre_and_year(movies_df, ratings_df, genre, year) that takes four parameters:
+
+movies_df: a pandas DataFrame containing movie data with columns "title", "year", and "genre"(created in1.1).
+ratings_df: a pandas DataFrame containing ratings data with columns "user_id", "movie_id", and "rating"(created in1.2).
+genre (str): The genre to filter movies by.
+year (int or str): The year to filter movies by.
+Definition of highest-rated: For the purposes of this function, a highest-rated movie is defined by its average rating, calculated from all the ratings it has received in the ratings_df.
+
+In cases where multiple movies share the same highest average rating for the specified genre and year, the movie with the greater number of ratings should be returned as the "highest-rated" movie. If no movies match the specified genre and year criteria, or if all movies in the category have not received any ratings, the function should return None.
