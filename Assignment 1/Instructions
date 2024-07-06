@@ -1,0 +1,9 @@
+1. Primes: Write a function to return all the prime numbers less than n, where n is a parameter (assume n > 2) 
+
+2. Factor: Write a function to return all the prime factors of n, where n is a parameter (Hint: you can call your primes function from the previous problem) 
+
+3. Decreasing_digits: Write a function called decreasing_digits to count all integers from 1 to n (inclusive) that have all digits in decreasing order, where n is given as a parameter 
+
+4. Stats : Write a function called stats to return the mean and median of a list of integers given as a parameter 
+
+5. one_triples: Write a function called one_triples to return all triples in a list of integers that sum to one. You can assume the list won’t contain any duplicates, and a triple should not use the same number more than once. All triples should be returned in a list of tuples, where each tuple is in sorted order. 
