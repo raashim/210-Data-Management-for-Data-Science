@@ -1,0 +1,71 @@
+Various sql queries: 
+
+Database Schema: 
+1. Product Table
+This table stores information about products available for purchase.
+
+product_id: Unique identifier for each product (auto-incremented).
+name: Name of the product.
+description: Detailed description of the product.
+unit_price: Price per unit of the product.
+brand: Brand name of the product.
+stock_remaining: The number of units available in stock.
+
+2. Rating Table
+This table stores ratings and reviews given by users to products.
+
+rating_id: Unique identifier for each rating (auto-incremented).
+rating_value: Numerical rating value, constrained between 1 and 5.
+review: Text review of the product.
+user_id: Identifier of the user who gave the rating (foreign key referencing User table).
+product_id: Identifier of the product being rated (foreign key referencing Product table).
+
+3. User Table
+This table stores information about users of the application.
+
+user_id: Unique identifier for each user (auto-incremented).
+first_name: First name of the user.
+last_name: Last name of the user.
+email: Email address of the user.
+username: Unique username for the user.
+
+4. Order Table
+This table stores information about orders placed by users.
+
+order_id: Unique identifier for each order (auto-incremented).
+order_number: Unique order number.
+order_date: Date and time when the order was placed.
+user_id: Identifier of the user who placed the order (foreign key referencing User table).
+order_total: Total amount of the order.
+order_status: Current status of the order, constrained to specific values ('Pending', 'Ordered', 'Shipped', 'Delivered', 'Canceled').
+
+5. Item Table
+This table stores information about items included in each order.
+
+item_id: Unique identifier for each item (auto-incremented).
+quantity: Quantity of the product ordered (default value is 1).
+unit_price: Unit price of the product at the time of order.
+product_id: Identifier of the product (foreign key referencing Product table).
+order_id: Identifier of the order containing the item (foreign key referencing Order table).
+
+QUERIES: 
+
+Query 1: This query retrieves the top three users based on the total value of their orders placed in 2023. It calculates the total sum of order_total for each user and orders the results in descending order by total_sum, limiting the output to the top three users.
+
+Query 2: This query finds products that have not been ordered in 2023 or have never been ordered. It uses a LEFT JOIN to connect the Product table with the Item and Order tables and filters for products with no order date or an order date before 2023.
+
+Query 3: This query identifies users who have given ratings but have never placed an order. It joins the User table with the Rating table and uses a LEFT JOIN with the Order and Item tables, filtering for users who have no corresponding item entries.
+
+Query 4: This query determines the top-selling product for each year based on the quantity sold. It groups the results by year and orders them by the total quantity sold in descending order.
+
+Query 5: This query retrieves the top five highest-rated products by calculating the average rating value for each product and ordering the results in descending order of average rating.
+
+Query 6: This query finds the top five brands based on the total quantity of items ordered in 2023. It sums the quantities for each brand and orders the results in descending order of total items ordered.
+
+Query 7: This query identifies the most active users based on their combined count of ratings and orders. It sums the counts of ratings and orders for each user and orders the results by total activity in descending order.
+
+Query 8: This query retrieves the ten products that have received the most ratings. It counts the number of ratings for each product and orders the results in descending order by rating count.
+
+Query 9: This query finds brands whose products have an average rating of 4.0 or higher. It calculates the average rating for each brand and filters for those with an average rating meeting or exceeding 4.0.
+
+Query 10: This query identifies users with the highest proportion of reviewed products compared to ordered products. It calculates the ratio of distinct rated products to distinct ordered products for each user and orders the results in descending order by this proportion.
